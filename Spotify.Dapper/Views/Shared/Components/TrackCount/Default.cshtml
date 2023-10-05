@@ -1,0 +1,31 @@
+﻿<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
+
+<canvas id="pieTrackChart" width="1000" height="400"></canvas>
+
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+		var ctx = document.getElementById('pieTrackChart').getContext('2d');
+		var labels = @Html.Raw(Json.Serialize(ViewBag.artist_name));
+		var data = @Html.Raw(Json.Serialize(ViewBag.track_name));
+
+		var chartData = {
+			labels: labels,
+			datasets: [{
+				data: data,
+				backgroundColor: ['#FF0000', '#0000FF', '#00FF00', '#FFFF00', '#FFA500', '#800080', '#FFC0CB', '#A52A2A', '#808080', '#000000']
+			}]
+		};
+
+		var myBarChart = new Chart(ctx, {
+			type: 'pie',
+			data: chartData,
+			options: {
+				title: {
+					display: true,
+					text: 'TOP 10 EN FAZLA PARÇASI OLAN SANATÇILAR'
+				}
+			}
+		});
+
+	});
+</script>

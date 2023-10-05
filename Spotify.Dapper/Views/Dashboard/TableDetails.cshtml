@@ -1,0 +1,83 @@
+﻿@{
+	ViewData["Title"] = "TableDetails";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card-title">
+	<h4>Tablo Açıklamaları</h4>
+</div>
+<div class="table-responsive">
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th>Tablo Adı</th>
+				<th>Açıklaması</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>Popülerlik</td>
+				<td>Parçanın popülerliği(0/100)</td>
+			</tr>
+			<tr>
+				<td>Yıl</td>
+				<td>Parçanın yayınlandığı yıl(2000/2023)</td>
+			</tr>
+			<tr>
+				<td>Dans Edilebilirlik</td>
+				<td>Parçanın dansa uygunluğu(0.0/1.0)</td>
+			</tr>
+			<tr>
+				<td>Enerji</td>
+				<td>Yoğunluk ve aktivitenin algısal ölçüsü(0.0/1.0)</td>
+			</tr>
+			<tr>
+				<td>Key</td>
+				<td>Anahtar, parçanın içindedir (-1/-11)</td>
+			</tr>
+			<tr>
+				<td>Ses Yüksekliği</td>
+				<td>Desibel cinsinden parçanın genel ses yüksekliği(-60/0 dB)</td>
+			</tr>
+			<tr>
+				<td>Mod</td>
+				<td>Parçanın modalitesi(Major "1/" Minor "0"</td>
+			</tr>
+			<tr>
+				<td>Konuşkanlık</td>
+				<td>Parçada konuşulan kelimelerin varlığı</td>
+			</tr>
+			<tr>
+				<td>Akustiklik</td>
+				<td>Parçanın akustik olup olmadığına dair 0'dan 1'e kadar güven ölçümü</td>
+			</tr>
+			<tr>
+				<td>Araçsallık</td>
+				<td>Parçanın vokal içerip içermediği(0.0/1.0)</td>
+			</tr>
+			<tr>
+				<td>Canlılık</td>
+				<td>Kayıtta seyircinin varlığı(0.0/1.0)</td>
+			</tr>
+			<tr>
+				<td>Değerlilik</td>
+				<td>Müzikal pozitiflik</td>
+			</tr>
+			<tr>
+				<td>Tempo</td>
+				<td>Parçanın dakika başına vuruş cinsinden temposu</td>
+			</tr>
+			<tr>
+				<td>Süre(ms)</td>
+				<td>Tahmini zaman işareti (3/7)</td>
+			</tr>
+			<tr>
+				<td>İmza Zamanı</td>
+				<td>Parçanın milisaniye cinsinden süresi</td>
+			</tr>
+
+		</tbody>
+	</table>
+</div>
+
+

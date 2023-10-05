@@ -1,0 +1,61 @@
+﻿<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
+
+<canvas id="myBarChart" width="1000" height="400"></canvas>
+
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+		var ctx = document.getElementById('myBarChart').getContext('2d');
+		var labels = @Html.Raw(Json.Serialize(ViewBag.TrackName));
+		var data = @Html.Raw(Json.Serialize(ViewBag.Popularity));
+
+		var chartData = {
+			labels: labels,
+			datasets: [{
+				label: 'TOP 10 POPULER PARÇALAR',
+				data: data,
+				backgroundColor: [
+					'rgba(255, 99, 132, 0.2)',
+					'rgba(255, 159, 64, 0.2)',
+					'rgba(255, 205, 86, 0.2)',
+					'rgba(75, 192, 192, 0.2)',
+					'rgba(54, 162, 235, 0.2)',
+					'rgba(153, 102, 255, 0.2)',
+					'rgba(201, 203, 207, 0.2)',
+					'rgba(211, 223, 107, 0.2)',
+					'rgba(153, 152, 205, 0.2)',
+					'rgba(211, 223, 107, 0.2)'
+				],
+				borderColor: [
+					'rgb(255, 99, 132)',
+					'rgb(255, 159, 64)',
+					'rgb(255, 205, 86)',
+					'rgb(75, 192, 192)',
+					'rgb(54, 162, 235)',
+					'rgb(153, 102, 255)',
+					'rgb(201, 203, 207)',
+					'rgb(211, 223, 107)',
+					'rgb(153, 152, 205)',
+					'rgb(201, 203, 207)'
+				],
+				borderWidth: 0.1
+			}]
+		};
+
+		
+
+		var myBarChart = new Chart(ctx, {
+			type: 'horizontalBar',
+			data: chartData,
+			options: {
+				scales: {
+					xAxes: [{
+						ticks: {
+							beginAtZero: true
+						}
+					}]
+				}
+			}
+		});
+
+	});
+</script>

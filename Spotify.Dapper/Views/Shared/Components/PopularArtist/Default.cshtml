@@ -1,0 +1,59 @@
+﻿<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"></script>
+
+<canvas id="myArtistBarChart" width="1000" height="400"></canvas>
+
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+		var ctx = document.getElementById('myArtistBarChart').getContext('2d');
+		var labels = @Html.Raw(Json.Serialize(ViewBag.Artist));
+		var data = @Html.Raw(Json.Serialize(ViewBag.Count));
+
+		var chartData = {
+			labels: labels,
+			datasets: [{
+				label: 'TOP 10 POPULER SANATÇILAR',
+				data: data,
+				backgroundColor: [
+					'rgba(255, 99, 132, 0.2)',
+					'rgba(54, 162, 235, 0.2)',
+					'rgba(255, 206, 86, 0.2)',
+					'rgba(153, 102, 255, 0.2)',
+					'rgba(255, 159, 64, 0.2)',
+					'rgba(0, 0, 0, 0.2)',
+					'rgba(128, 128, 128, 0.2)',
+					'rgba(0, 128, 0, 0.2 0.2)',
+					'rgba(255, 0, 0, 0.2)',
+					'rgba(75, 192, 192, 0.2)'
+				],
+				borderColor: [
+					'rgb(255, 99, 132)',
+					'rgb(54, 162, 235)',
+					'rgb(255, 206, 86)',
+					'rgb(153, 102, 255)',
+					'rgb(255, 159, 64',
+					'rgb(0, 0, 0)',
+					'rgb(128, 128, 128)',
+					'rgb(255, 0, 0)',
+					'rgb(255, 0, 0, 0.2)',
+					'rgb(75, 192, 192)'
+				],
+				borderWidth: 0.1
+			}]
+		};
+
+		var myBarChart = new Chart(ctx, {
+			type: 'bar',
+			data: chartData,
+			options: {
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero: true
+						}
+					}]
+				}
+			}
+		});
+
+	});
+</script>

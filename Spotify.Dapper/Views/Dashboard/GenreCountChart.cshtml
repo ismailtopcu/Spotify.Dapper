@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewData["Title"] = "GenreCountChart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+
+<canvas id="myBarChart" width="400" height="400"></canvas>
+
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+		var ctx = document.getElementById('myBarChart').getContext('2d');
+		var labels = @Html.Raw(Json.Serialize(ViewBag.ChartLabels)); 
+		var data = @Html.Raw(Json.Serialize(ViewBag.ChartData)); 
+
+		function capitalizeFirstLetter(str) {
+			return str.charAt(0).toUpperCase() + str.slice(1);
+		}
+
+		labels = labels.map(capitalizeFirstLetter);
+
+		var chartData = {
+			labels: labels,
+			datasets: [{
+				label: 'Türe Ait Parça Sayısı',
+				data: data,
+				backgroundColor: 'rgba(0, 0, 255, 0.2)',
+				borderColor: 'rgba(0, 0, 255, 1)',
+				borderWidth: 1
+			}]
+		};
+
+		var options = {
+			scales: {
+				x: {
+					beginAtZero: true,
+					reverse: true,
+					min: 100,
+					max: 10000
+				},
+				y: {
+					display: false
+				}
+			},
+			plugins: {
+				legend: {
+					display: false
+				}
+			}
+		};
+
+		var myBarChart = new Chart(ctx, {
+			type: 'horizontalBar',
+			data: chartData,
+			options: options
+		});
+
+	});
+</script>
+

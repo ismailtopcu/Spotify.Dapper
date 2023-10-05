@@ -1,0 +1,43 @@
+﻿@using X.PagedList;
+@model IPagedList<SpotifyDataDto>
+@{
+	ViewData["Title"] = "Index";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+	<div class="card-title">
+		<h4>Spotify Parça Listesi</h4>
+	</div>
+<div class="table-responsive">
+	<table class="table table-striped  table-hover table-bordered zero-configuration">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Sanatçı</th>
+				<th>Şarkı Adı</th>
+				<th>Şarkı Id</th>
+				<th>Yıl</th>				
+				<th>Tür </th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>@item.F1 </td>
+					<td>@item.artist_name</td>
+					<td>@item.track_name</td>
+					<td>@item.track_id</td>
+					<td>@item.year</td>
+					<td>@item.genre</td>					
+				</tr>
+			}
+		</tbody>
+	</table>
+	@Html.PagedListPager((IPagedList)Model,page=>Url.Action("Index",new {page}),
+	new X.PagedList.Web.Common.PagedListRenderOptions {
+	LiElementClasses = new string[] { "page-item" },
+	PageClasses = new string[] { "page-link" }
+	})
+
+</div>

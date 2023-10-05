@@ -1,0 +1,79 @@
+﻿@using X.PagedList;
+@model IPagedList<SpotifyDataDto>
+@{
+	ViewData["Title"] = "BigTable";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="card-title">
+	<h4>
+		Spotify Data Listesi
+		@if (ViewBag.SearchTerm != "")
+		{
+			<text> "Aranan Kelime" = @ViewBag.SearchTerm </text>
+		}
+		
+	</h4>
+	<h5>@ViewBag.Elapsed</h5>
+</div>
+<div class="table-responsive">
+	<table class="table table-striped table-hover table-bordered zero-configuration">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Sanatçı</th>
+				<th>Şarkı Adı</th>
+				<th>Yıl</th>
+				<th>Popülerlik</th>
+				<th>Tür</th>
+				<th>Dans Edilebilirlik</th>
+				<th>Enerji</th>
+				<th>Key</th>
+				<th>Ses Yüksekliği</th>
+				<th>Mod</th>
+				<th>Konuşkanlık</th>
+				<th>Akustiklik</th>
+				<th>Araçsallık</th>
+				<th>Canlılık</th>
+				<th>Değerlilik</th>
+				<th>Tempo</th>
+				<th>Süre(ms)</th>
+				<th>İmza Zamanı</th>
+
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var item in Model)
+			{
+				<tr>
+					<td>@item.F1 </td>
+					<td>@item.artist_name</td>
+					<td>@item.track_name</td>
+					<td>@item.year</td>
+					<td>@item.popularity</td>
+					<td>@item.genre</td>
+					<td>@item.danceability</td>
+					<td>@item.energy</td>
+					<td>@item.key</td>
+					<td>@item.loudness</td>
+					<td>@item.mode</td>
+					<td>@item.speechiness</td>
+					<td>@item.acousticness</td>
+					<td>@item.instrumentalness</td>
+					<td>@item.liveness</td>
+					<td>@item.valence</td>
+					<td>@item.tempo</td>
+					<td>@item.duration_ms</td>
+					<td>@item.time_signature</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+	@Html.PagedListPager((IPagedList)Model,page=>Url.Action("BigTable",new {page}),
+	new X.PagedList.Web.Common.PagedListRenderOptions {
+	LiElementClasses = new string[] { "page-item" },
+	PageClasses = new string[] { "page-link" }
+	})
+
+</div>
+
