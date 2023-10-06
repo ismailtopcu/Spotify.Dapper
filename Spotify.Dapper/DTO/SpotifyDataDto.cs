@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace Spotify.Dapper.DTO
 {
-    public class SpotifyDataDto
+    public class SpotifyData
     {
+        
         public float? F1 { get; set; }
         [MaxLength(255)]
         public string? artist_name { get; set; }

@@ -24,11 +24,7 @@ namespace Spotify.Dapper.Controllers
 		{
 			return View();
 		}
-		//public async Task<IActionResult> BigTable(int page = 1)
-		//{
-		//	var values = await _spotifyDataService.GetSpotifyDatas();
-		//	return View(values.ToPagedList(page, 100));
-		//}
+		
 		public async Task<IActionResult> GenreCountChart()
 		{
 			var values = await _spotifyDataService.GetGenreCountList();
@@ -42,14 +38,22 @@ namespace Spotify.Dapper.Controllers
 		public async Task<IActionResult> BigTable(int page = 1, string searchTerm = "")
 		{
 			Stopwatch stopwatch = Stopwatch.StartNew();
-			// Arama terimini kullanarak verileri çekin
 			var values = await _spotifyDataService.GetSpotifyDatas(searchTerm);
 			stopwatch.Stop();
 			ViewBag.SearchTerm=searchTerm;
 			ViewBag.Elapsed = ($"Sorgu süresi: {stopwatch.ElapsedMilliseconds} milisaniye");
 
-			// Sonuçları sayfalandırın ve görünüme gönderin
 			return View(values.ToPagedList(page, 1000));
+		}
+
+		public async Task<IActionResult> BigTableWithEf(int page = 1)
+		{
+			Stopwatch stopwatch = Stopwatch.StartNew();
+			var values = await _spotifyDataService.GetSpotifyDatasWithEf();
+			stopwatch.Stop();
+			ViewBag.Elapsed = ($"Sorgu süresi: {stopwatch.ElapsedMilliseconds} milisaniye");
+			return View(values.ToPagedList(page, 1000));
+
 		}
 	}
 }

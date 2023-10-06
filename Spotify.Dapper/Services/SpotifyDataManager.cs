@@ -1,6 +1,8 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Spotify.Dapper.DTO;
+using Spotify.Dapper.Models;
 
 namespace Spotify.Dapper.Services
 {
@@ -16,16 +18,16 @@ namespace Spotify.Dapper.Services
 			return results.ToList();
 		}
 
-		public async Task<List<SpotifyDataDto>> GetSpotifyDatas()
+		public async Task<List<SpotifyData>> GetSpotifyDatas()
 		{
 			using var connection = new SqlConnection(_connectionString);
 			connection.Open();
-			var results = await connection.QueryAsync<SpotifyDataDto>("select * from SpotifyData");
+			var results = await connection.QueryAsync<SpotifyData>("select * from SpotifyData");
 
 			return results.ToList();
 		}
 
-		public async Task<List<SpotifyDataDto>> GetSpotifyDatas(string searchTerm)
+		public async Task<List<SpotifyData>> GetSpotifyDatas(string searchTerm)
 		{
 			using var connection = new SqlConnection(_connectionString);
 			connection.Open();
@@ -47,7 +49,7 @@ namespace Spotify.Dapper.Services
 					}
 				}
 			}
-			var results = await connection.QueryAsync<SpotifyDataDto>(sql, new { SearchTerm = searchTerm });
+			var results = await connection.QueryAsync<SpotifyData>(sql, new { SearchTerm = searchTerm });
 			return results.ToList();
 		}
 
@@ -83,6 +85,13 @@ namespace Spotify.Dapper.Services
 			connection.Open();
 			var result = await connection.QueryAsync<ResultPopularArtistDto>("select top 10 Count(*) as track_name, artist_name from SpotifyData group by artist_name order by  track_name desc");
 			return result.ToList();
+		}
+
+		public async Task<List<SpotifyData>> GetSpotifyDatasWithEf()
+		{
+			using var context = new AppDbContext();
+			var spotifyDatas = await context.SpotifyData.ToListAsync();
+			return spotifyDatas;
 		}
 	}
 	

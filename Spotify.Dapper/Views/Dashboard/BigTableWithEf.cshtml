@@ -1,18 +1,13 @@
 ﻿@using X.PagedList;
 @model IPagedList<SpotifyData>
 @{
-	ViewData["Title"] = "BigTable";
-	Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "BigTableWithEf";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="card-title">
 	<h4>
 		Spotify Data Listesi
-		@if (ViewBag.SearchTerm != "")
-		{
-			<text> "Aranan Kelime" = @ViewBag.SearchTerm </text>
-		}
-		
 	</h4>
 	<h5>@ViewBag.Elapsed</h5>
 </div>
